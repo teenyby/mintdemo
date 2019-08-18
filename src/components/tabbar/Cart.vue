@@ -1,5 +1,7 @@
 <template>
-    <h3>我是首页</h3>
+      <div>
+        <h2>我是购物车页</h2>
+    </div>
 </template>
 
 <script>

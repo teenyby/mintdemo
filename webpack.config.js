@@ -73,7 +73,14 @@ module.exports = {
         contentBase: path.join(__dirname, 'dist'),
         open: true,
         //开启热更新，局部
-        hot: true
+        hot: true,
+        // proxy: {
+        //     '/api': {
+        //       target: 'http://www.liulongbin.top:3005/api',
+        //       changeOrigin: true,
+        //       pathRewrite: { '^/api': '' }
+        //     }
+        //   }
     },
 
 }
