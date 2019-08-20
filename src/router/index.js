@@ -8,7 +8,8 @@ import home from '../components/tabbar/Home.vue'
 import member from '../components/tabbar/Member.vue'
 import cart from '../components/tabbar/Cart.vue'
 import search from '../components/tabbar/Search.vue'
-
+import News from '../components/home/Newslist.vue'
+import Newsinfo from '../components/home/Newsinfo.vue'
 
 
 const router = new vueRouter({
@@ -27,6 +28,12 @@ const router = new vueRouter({
     }, {
         path: '/search',
         component: search
+    }, {
+        path: '/home/newslist',
+        component: News
+    }, {
+        path: '/home/newsinfo/:id',
+        component: Newsinfo
     }],
 
     linkActiveClass: 'mui-active'

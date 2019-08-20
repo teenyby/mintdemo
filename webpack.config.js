@@ -60,6 +60,11 @@ module.exports = {
 
         ]
     },
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, '../src')
+        }
+    },
     //处理插件
     plugins: [new htmlwebpackplugin({
             template: path.join(__dirname, 'src', 'index.html')

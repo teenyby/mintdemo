@@ -40,6 +40,7 @@ body {
 }
 .app-container {
   padding-top: 40px;
+  padding-bottom: 50px;
   overflow-x: hidden;
 }
 .v-enter {
@@ -53,6 +54,6 @@ body {
 }
 .v-enter-active,
 .v-leave-active {
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 </style>
