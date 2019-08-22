@@ -2,8 +2,8 @@
   <div class="cmt-container">
     <h3>发表评论</h3>
     <hr>
-    <textarea placeholder="你他吗想说啥，快点说最多120个字" maxlength="120" cols="10" rows="5"></textarea>
-    <mt-button type="primary" size="large">发表评论</mt-button>
+    <textarea placeholder="你他吗想说啥，快点说最多120个字" maxlength="120" cols="10" rows="5" v-model="neirong"></textarea>
+    <mt-button type="primary" size="large" @click="postcmt">发表评论</mt-button>
     <div class="cmt-list">
       <div class="cmt-item" v-for="(item,index) in commentlist" :key="item.add_time">
         <div
@@ -25,7 +25,8 @@ export default {
   data() {
     return {
       pageindex: 1,
-      commentlist: []
+      commentlist: [],
+      neirong: ""
     };
   },
   props: ["newsid"],
@@ -48,6 +49,30 @@ export default {
     getmore() {
       this.pageindex++;
       this.getcomment();
+    },
+    //发表评论
+    postcmt() {
+      if (this.neirong.trim().length === 0) {
+        return Toast("评论信息不能为空");
+      }
+      axios
+        .post("/api/postcomment/" + this.$route.params.id, {
+          content: this.neirong
+        })
+        .then(res => {
+          let { message, status } = res.data;
+          if (status === 0) {
+            let msg = {
+              user_name: "匿名用户",
+              add_time: Date.now(),
+              content: this.neirong.trim()
+            };
+            this.commentlist.unshift(msg);
+            this.neirong = "";
+          } else {
+            Toast("发表评论失败");
+          }
+        });
     }
   }
 };

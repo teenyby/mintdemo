@@ -1,11 +1,7 @@
 <template>
   <div>
     <!-- 轮播图 -->
-    <mt-swipe :auto="4000">
-      <mt-swipe-item v-for="item in swipelist" :key="item.img">
-        <img :src="item.img" alt>
-      </mt-swipe-item>
-    </mt-swipe>
+    <swiper :swipelist="swipelist" :isfull='true'></swiper>
     <!-- 六宫格 -->
     <div class="mui-content">
       <ul class="mui-table-view mui-grid-view mui-grid-9">
@@ -16,16 +12,16 @@
           </router-link>
         </li>
         <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-          <a href="#">
+          <router-link to="/home/photolist">
             <img src="../../assets/menu2.png" alt>
             <div class="mui-media-body">你才垃圾</div>
-          </a>
+          </router-link>
         </li>
         <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-          <a href="#">
+          <router-link to="/home/goodslist">
             <img src="../../assets/menu3.png" alt>
             <div class="mui-media-body">我不像你</div>
-          </a>
+          </router-link>
         </li>
         <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
           <a href="#">
@@ -53,6 +49,7 @@
 <script>
 import axios from "axios";
 import { Toast } from "mint-ui";
+import swiper from "../common/Swiper.vue";
 export default {
   data() {
     return {
@@ -62,10 +59,10 @@ export default {
   created() {
     this.getlunbo();
   },
+  components: { swiper },
   methods: {
     getlunbo() {
       axios.get("http://www.liulongbin.top:3005/api/getlunbo").then(res => {
-        console.log(res.data);
         if (res.data.status === 0) {
           this.swipelist = res.data.message;
           Toast("加载轮播图成功。。。");
@@ -79,24 +76,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.mint-swipe {
-  height: 200px;
-  .mint-swipe-item {
-    &:nth-child(1) {
-      background: "../../assets/001 (2).jpg";
-    }
-    &:nth-child(2) {
-      background-image: "../../assets/001 (2).jpg";
-    }
-    &:nth-child(3) {
-      background-image: "../../assets/001 (3).jpg";
-    }
-    img {
-      width: 100%;
-      height: 100%;
-    }
-  }
-}
 //消除六宫格上方15px margin
 .mui-content > .mui-table-view:first-child {
   margin-top: 0;
